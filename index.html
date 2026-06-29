@@ -742,7 +742,7 @@
     <div class="about-img-wrap">
       <div class="about-img-placeholder">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        <span><img src="img/증명사진.webp"></span>
+        <span><img src="images/증명사진.webp"></span>
       </div>
       <div class="about-accent">2024 · Available</div>
     </div>
@@ -927,7 +927,7 @@
   </div>
   <div class="portfolio-grid">
     <div class="project-card" data-category="브랜딩">
-      <div class="project-thumb project-thumb-1"><img src="img/진흥원 일러.webp"></div>
+      <div class="project-thumb project-thumb-1"><img src="images/진흥원 일러.webp"></div>
       <div class="project-body">
         <div class="project-tags"><span class="project-tag" data-category="브랜딩">브랜딩</span><span class="project-tag">지역문화</span></div>
         <div class="project-title">송산이랑</div>
@@ -936,7 +936,7 @@
       </div>
     </div>
     <div class="project-card" data-category="브랜딩">
-      <div class="project-thumb project-thumb-2"><img src="img/브랜드 목업.webp"></div>
+      <div class="project-thumb project-thumb-2"><img src="images/브랜드 목업.webp"></div>
       <div class="project-body">
         <div class="project-tags"><span class="project-tag" data-category="브랜딩">브랜딩</span><span class="project-tag">동물보호</span></div>
         <div class="project-title">Clawver</div>
@@ -945,7 +945,7 @@
       </div>
     </div>
     <div class="project-card" data-category="브랜딩">
-      <div class="project-thumb project-thumb-3"><img src="img/대지 13.png"></div>
+      <div class="project-thumb project-thumb-3"><img src="images/대지 13.webp"></div>
       <div class="project-body">
         <div class="project-tags"><span class="project-tag" data-category="브랜딩">브랜딩</span><span class="project-tag">향초</span></div>
         <div class="project-title">Royal Scent</div>
@@ -954,7 +954,7 @@
       </div>
     </div>
     <div class="project-card" data-category="편집">
-      <div class="project-thumb project-thumb-4"><img src="img/노한별_광고 디자인.webp"></div>
+      <div class="project-thumb project-thumb-4"><img src="images/노한별_광고 디자인.webp"></div>
       <div class="project-body">
         <div class="project-tags"><span class="project-tag" data-category="편집">광고</span><span class="project-tag">편집</span></div>
         <div class="project-title">가짜뉴스</div>
@@ -963,7 +963,7 @@
       </div>
     </div>
     <div class="project-card" data-category="편집">
-      <div class="project-thumb project-thumb-5"><img src="img/편집디자인 목업2.webp"></div>
+      <div class="project-thumb project-thumb-5"><img src="images/편집디자인 목업2.webp"></div>
       <div class="project-body">
         <div class="project-tags"><span class="project-tag" data-category="편집">편집</span></div>
         <div class="project-title">SAUL BASS: Film Maker</div>
@@ -972,7 +972,7 @@
       </div>
     </div>
     <div class="project-card" data-category="영상">
-      <div class="project-thumb project-thumb-6"><img src="img/썸넬.png"></div>
+      <div class="project-thumb project-thumb-6"><img src="images/썸넬.webp"></div>
       <div class="project-body">
         <div class="project-tags"><span class="project-tag" data-category="영상">영상</span><span class="project-tag">드라마</span></div>
         <div class="project-title">달의연인:보보경심려</div>
@@ -1102,7 +1102,7 @@
     <p class="qr-modal-title">카카오톡 친구추가</p>
     <p class="qr-modal-sub">QR코드를 스캔해주세요</p>
     <!-- ✏️ src에 QR코드 이미지 경로 입력 -->
-    <img class="qr-modal-img" src="img/카톡 친추.png" alt="카카오톡 QR코드">
+    <img class="qr-modal-img" src="images/카톡 친추.webp" alt="카카오톡 QR코드">
     <p class="qr-modal-hint">카카오톡 앱 → 친구 탭 → QR코드 스캔</p>
   </div>
 </div>
@@ -1112,7 +1112,7 @@
     <p class="qr-modal-title">Instagram</p>
     <p class="qr-modal-sub">QR코드로 팔로우해주세요</p>
     <!-- ✏️ src에 인스타 QR코드 이미지 경로 입력 -->
-    <img class="qr-modal-img" src="img/인스타.png" alt="Instagram QR코드">
+    <img class="qr-modal-img" src="images/인스타.webp" alt="Instagram QR코드">
     <p class="qr-modal-hint">카메라 앱으로 QR코드를 스캔하면 바로 연결돼요</p>
   </div>
 </div>
@@ -1289,7 +1289,7 @@ document.querySelector(".resume-download").addEventListener("click", async funct
         useCORS:true
     });
 
-    const imgData = canvas.toDataURL("image/png");
+    const imgData = canvas.toDataURL("image/webp");
 
     const pdf = new jsPDF("p","mm","a4");
 
@@ -1302,13 +1302,13 @@ document.querySelector(".resume-download").addEventListener("click", async funct
     let heightLeft = imgHeight;
     let position = 0;
 
-    pdf.addImage(imgData,"PNG",0,position,imgWidth,imgHeight);
+    pdf.addImage(imgData,"webp",0,position,imgWidth,imgHeight);
     heightLeft -= pdfHeight;
 
     while(heightLeft > 0){
         position -= pdfHeight;
         pdf.addPage();
-        pdf.addImage(imgData,"PNG",0,position,imgWidth,imgHeight);
+        pdf.addImage(imgData,"webp",0,position,imgWidth,imgHeight);
         heightLeft -= pdfHeight;
     }
 
