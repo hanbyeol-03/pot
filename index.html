@@ -1293,7 +1293,7 @@ document.querySelector('.resume-download').addEventListener('click', async funct
       backgroundColor: '#ffffff'
     });
 
-    const imgData = canvas.toDataURL('image/png'); // ← PNG로 변경
+    const imgData = canvas.toDataURL('images/png'); // ← PNG로 변경
     const pdf = new jsPDF('p', 'mm', 'a4');
 
     const pdfWidth  = pdf.internal.pageSize.getWidth();
