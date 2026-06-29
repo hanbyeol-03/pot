@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>송산이랑 — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple:    #5B4B8A;
+    --purple-lt: #7C6BA8;
+    --purple-dk: #3D3060;
+    --beige:     #F5F0E8;
+    --beige-dk:  #E8E0D0;
+    --cream:     #FDFAF5;
+    --ink:       #1E1A2E;
+    --muted:     #7A7490;
+    --white:     #FFFFFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); font-size: 16px; line-height: 1.7; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    padding: 0 5%;
+    background: rgba(253,250,245,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--beige-dk);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 0;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--purple-dk); text-decoration: none; }
+  .nav-back { font-size: 0.85rem; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+  .nav-back:hover { color: var(--purple); }
+
+  /* PAGE */
+  .page { max-width: 1200px; margin: 0 auto; padding: 6rem 5% 5rem; }
+
+  /* 헤더 */
+  .project-header { margin-bottom: 2.5rem; }
+  .project-category {
+    display: inline-block; font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--purple); background: var(--beige);
+    padding: 0.3rem 0.85rem; border-radius: 20px; margin-bottom: 1rem;
+  }
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400; line-height: 1.1; color: var(--ink); margin-bottom: 0.9rem;
+  }
+  .project-subtitle { font-size: 1rem; color: var(--muted); max-width: 600px; line-height: 1.8; }
+
+  /* 메인 이미지 */
+  .main-img-wrap {
+    width: 100%; aspect-ratio: 16/9;
+    border-radius: 6px; overflow: hidden;
+    background: var(--beige); margin-bottom: 3rem;
+  }
+  .main-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* 2단 레이아웃 */
+  .project-layout { display: grid; grid-template-columns: 1fr 320px; gap: 4rem; align-items: start; }
+
+  /* 본문 */
+  .section-block { margin-bottom: 2.5rem; }
+  .section-block h3 {
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--beige-dk);
+  }
+  .section-block p { font-size: 0.95rem; color: var(--muted); line-height: 1.85; }
+
+  /* 갤러리 */
+  .gallery-section { margin-bottom: 2.5rem; }
+  .gallery-section h3 {
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--beige-dk);
+  }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; }
+  .gallery-slot {
+    aspect-ratio: 4/3; border-radius: 4px; overflow: hidden;
+    background: var(--beige); cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .gallery-slot:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(91,75,138,0.12); }
+  .gallery-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* 사이드바 */
+  .sidebar { position: sticky; top: 5.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
+  .sidebar-card { background: var(--white); border: 1px solid var(--beige-dk); border-radius: 6px; padding: 1.5rem; }
+  .sidebar-card h4 {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 1rem;
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--beige-dk);
+  }
+  .tool-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .tool-tag {
+    font-size: 0.75rem; font-weight: 500;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--beige-dk); border-radius: 20px;
+    color: var(--purple); background: var(--beige);
+  }
+  .info-list { display: flex; flex-direction: column; gap: 0.8rem; }
+  .info-row { display: flex; flex-direction: column; gap: 0.1rem; }
+  .info-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .info-value { font-size: 0.88rem; color: var(--ink); font-weight: 500; }
+
+  /* 이전/다음 */
+  .project-nav {
+    margin-top: 4rem; padding-top: 2rem;
+    border-top: 1px solid var(--beige-dk);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .pnav-item {
+    text-decoration: none; padding: 1.2rem 1.4rem;
+    border: 1px solid var(--beige-dk); border-radius: 4px;
+    background: var(--white); transition: border-color 0.2s, transform 0.15s;
+    display: flex; flex-direction: column; gap: 0.35rem;
+  }
+  .pnav-item:hover { border-color: var(--purple); transform: translateY(-2px); }
+  .pnav-item.next { text-align: right; }
+  .pnav-dir { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .pnav-name { font-size: 0.92rem; font-weight: 500; color: var(--ink); }
+
+  /* 라이트박스 */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 500;
+    background: rgba(20,16,36,0.93);
+    align-items: center; justify-content: center; padding: 2rem;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; border-radius: 4px; }
+  .lb-close {
+    position: absolute; top: 1.2rem; right: 1.5rem;
+    background: none; border: none; color: #fff;
+    font-size: 2rem; cursor: pointer; opacity: 0.6; transition: opacity 0.2s;
+  }
+  .lb-close:hover { opacity: 1; }
+
+  /* FOOTER */
+  footer { background: var(--ink); padding: 2rem 5%; margin-top: 5rem; }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; color: rgba(255,255,255,0.6); text-decoration: none; }
+  footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+
+  @media (max-width: 768px) {
+    .project-layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .project-nav { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="portfolio.html" class="nav-logo">Portfolio.</a>
+    <a href="index.html" class="nav-back">← 포트폴리오 목록</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- 헤더 -->
+  <div class="project-header">
+    <span class="project-category">편집 디자인</span>
+    <h1 class="project-title">가짜뉴스</h1>
+    <p class="project-subtitle">가짜뉴스의 위험성을 주제로 정보의 진위를 판단하는 중요성을 전달한 타이포그래피 디자인 프로젝트를 실행하였다.</p>
+  </div>
+
+  <!-- 메인 이미지 -->
+  <div class="main-img-wrap">
+    <img src="img/노한별_광고 디자인.jpg" alt="송산이랑 메인 이미지">
+  </div>
+
+  <div class="project-layout">
+
+    <!-- 왼쪽 본문 -->
+    <div class="project-main">
+
+      <div class="section-block">
+        <h3>프로젝트 배경</h3>
+        <p>디지털 환경에서 빠르게 확산되는 가짜뉴스의 위험성을 알리고, 정보의 진위 여부를 비판적으로 판단하는 중요성을 전달하고자 본 프로젝트를 기획하였다.</p>
+      </div>
+
+      <div class="section-block">
+        <h3>디자인 컨셉</h3>
+        <p>가짜뉴스가 빠르게 확산되는 특성을 시각적으로 표현하기 위해 흩어지고 퍼져 나가는 텍스트 구성을 활용하였다. 또한 셰익스피어의 명대사 "To be, or not to be"를 응용한 카피를 적용하여 정보의 진위를 스스로 판단해야 한다는 메시지를 강조하였다. 레이아웃과 타이포그래피의 대비를 통해 긴장감과 가독성을 동시에 고려한 디자인을 완성하였다.</p>
+      </div>
+
+      <div class="section-block">
+        <h3>결과 및 성과</h3>
+        <p>졸업 전시를 통해 작품을 전시하며 사회적 메시지를 효과적으로 전달하는 타이포그래피 디자인을 구현하였다. 또한 전시를 위한 배너 제작과 레이아웃 구성 과정을 경험하며 정보 전달을 위한 시각적 구성 능력과 디자인 실무 역량을 향상시킬 수 있었다.</p>
+      </div>
+
+      <!-- 갤러리 -->
+      <div class="gallery-section">
+        <h3>작업 이미지</h3>
+        <div class="gallery-grid">
+          <div class="gallery-slot" onclick="openLB('img/노한별_광고 디자인.jpg')"><img src="img/노한별_광고 디자인.jpg" alt="작업 이미지 1"></div>
+        </div>
+      </div>
+
+      <!-- 이전/다음 -->
+      <div class="project-nav">
+        <a href="pot3.html" class="pnav-item prev">
+          <span class="pnav-dir">← 이전 프로젝트</span>
+          <span class="pnav-name">이전 작업 제목</span>
+        </a>
+        <a href="pot5.html" class="pnav-item next">
+          <span class="pnav-dir">다음 프로젝트 →</span>
+          <span class="pnav-name">다음 작업 제목</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- 오른쪽 사이드바 -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h4>사용 툴</h4>
+        <div class="tool-tags">
+          <span class="tool-tag">Adobe Illustrator</span>
+          <span class="tool-tag">Photoshop</span>
+        </div>
+      </div>
+      <div class="sidebar-card">
+        <h4>프로젝트 정보</h4>
+        <div class="info-list">
+          <div class="info-row">
+            <span class="info-label">카테고리</span>
+            <span class="info-value">편집 디자인</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">작업 기간</span>
+            <span class="info-value">2025.04 — 2025.12</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">역할</span>
+            <span class="info-value">단독 진행 / 기획·디자인</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">클라이언트</span>
+            <span class="info-value">개인 프로젝트</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="portfolio.html" class="footer-logo">Portfolio.</a>
+    <p>© 2026 노한별. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- 라이트박스 -->
+<div class="lightbox" id="lightbox" onclick="closeLB(event)">
+  <button class="lb-close" onclick="closeLB()">✕</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<script>
+  function openLB(src) {
+    document.getElementById('lbImg').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLB(e) {
+    if (e && e.target !== document.getElementById('lightbox') && !e.target.classList.contains('lb-close')) return;
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLB({ target: document.getElementById('lightbox') }); });
+</script>
+</body>
+</html>
