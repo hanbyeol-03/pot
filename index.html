@@ -1275,47 +1275,56 @@ function sendMail(e) {
     }, 3000);
   });
 }
-//이력서 다운로드
-document.querySelector(".resume-download").addEventListener("click", async function(e){
+// 이력서 다운로드
+document.querySelector('.resume-download').addEventListener('click', async function(e) {
+  e.preventDefault();
 
-    e.preventDefault();
+  const btn = this;
+  const original = btn.textContent;
+  btn.textContent = '📄 생성 중...';
 
+  try {
     const { jsPDF } = window.jspdf;
+    const target = document.getElementById('resumePDF');
 
-    const target = document.getElementById("resumePDF");
-
-    const canvas = await html2canvas(target,{
-        scale:2,
-        useCORS:true
+    const canvas = await html2canvas(target, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#ffffff'
     });
 
-    const imgData = canvas.toDataURL("image/webp");
+    const imgData = canvas.toDataURL('image/png'); // ← PNG로 변경
+    const pdf = new jsPDF('p', 'mm', 'a4');
 
-    const pdf = new jsPDF("p","mm","a4");
-
-    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfWidth  = pdf.internal.pageSize.getWidth();
     const pdfHeight = pdf.internal.pageSize.getHeight();
-
-    const imgWidth = pdfWidth;
-    const imgHeight = canvas.height * imgWidth / canvas.width;
+    const imgHeight = canvas.height * pdfWidth / canvas.width;
 
     let heightLeft = imgHeight;
-    let position = 0;
+    let position   = 0;
 
-    pdf.addImage(imgData,"webp",0,position,imgWidth,imgHeight);
+    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight); // ← PNG로 변경
     heightLeft -= pdfHeight;
 
-    while(heightLeft > 0){
-        position -= pdfHeight;
-        pdf.addPage();
-        pdf.addImage(imgData,"webp",0,position,imgWidth,imgHeight);
-        heightLeft -= pdfHeight;
+    while (heightLeft > 0) {
+      position   -= pdfHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight); // ← PNG로 변경
+      heightLeft -= pdfHeight;
     }
 
-    pdf.save("노한별_이력서.pdf");
+    pdf.save('노한별_이력서.pdf');
+    btn.textContent = '✅ 다운로드 완료!';
+    setTimeout(() => { btn.textContent = original; }, 3000);
 
+  } catch(err) {
+    console.error(err);
+    btn.textContent = '❌ 오류 발생';
+    setTimeout(() => { btn.textContent = original; }, 3000);
+  }
 });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>
